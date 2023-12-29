@@ -1,5 +1,5 @@
 {
-    "name": "spatie/laravel-permission",
+    "name": "ticketsnapgroup/laravel-permission",
     "description": "Permission handling for Laravel 8.0 and up",
     "license": "MIT",
     "keywords": [
@@ -26,7 +26,8 @@
         "illuminate/auth": "^8.12|^9.0|^10.0|^11.0",
         "illuminate/container": "^8.12|^9.0|^10.0|^11.0",
         "illuminate/contracts": "^8.12|^9.0|^10.0|^11.0",
-        "illuminate/database": "^8.12|^9.0|^10.0|^11.0"
+        "illuminate/database": "^8.12|^9.0|^10.0|^11.0",
+        "stancl\tenancy": "^3.7"
     },
     "require-dev": {
         "laravel/passport": "^11.0",

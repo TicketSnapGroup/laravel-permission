@@ -13,6 +13,8 @@ use Spatie\Permission\Guard;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\RefreshesPermissionCache;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+
 
 /**
  * @property ?\Illuminate\Support\Carbon $created_at
@@ -22,6 +24,7 @@ class Role extends Model implements RoleContract
 {
     use HasPermissions;
     use RefreshesPermissionCache;
+    use BelongsToTenant;
 
     protected $guarded = [];
 
