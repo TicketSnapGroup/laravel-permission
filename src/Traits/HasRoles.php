@@ -149,23 +149,23 @@ trait HasRoles
         $roles = $this->collectRoles($roles);
 
         $model = $this->getModel();
-        $teamPivot = app(PermissionRegistrar::class)->teams && ! is_a($this, Permission::class) ?
-            [app(PermissionRegistrar::class)->teamsKey => getPermissionsTeamId()] : [];
+        $customPivotData = [
+            'tenant_id' => tenant('id')
+        ];
 
         if ($model->exists) {
             $currentRoles = $this->roles->map(fn ($role) => $role->getKey())->toArray();
-
-            $this->roles()->attach(array_diff($roles, $currentRoles), $teamPivot);
+            $this->roles()->attach(array_diff($roles, $currentRoles), $customPivotData);
             $model->unsetRelation('roles');
         } else {
             $class = \get_class($model);
 
             $class::saved(
-                function ($object) use ($roles, $model, $teamPivot) {
+                function ($object) use ($roles, $model, $customPivotData) {
                     if ($model->getKey() != $object->getKey()) {
                         return;
                     }
-                    $model->roles()->attach($roles, $teamPivot);
+                    $model->roles()->attach($roles, $customPivotData);
                     $model->unsetRelation('roles');
                 }
             );
